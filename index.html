@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Kumar | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #3b82f6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3b82f6 }
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0;
+            transition: width 2s ease-in-out;
+        }
+        
+        .project-card {
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(10deg) translateY(-10px);
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .contact-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .animated-bg {
+            animation: gradientShift 8s ease infinite;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #475569);
+            background-size: 400% 400%;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="animated-bg">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/50 backdrop-blur-md py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">
+                <span class="text-blue-500">V</span>ivek
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white">Home</a>
+                <a href="#about" class="nav-link text-white">About</a>
+                <a href="#skills" class="nav-link text-white">Skills</a>
+                <a href="#projects" class="nav-link text-white">Projects</a>
+                <a href="#contact" class="nav-link text-white">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center">
+        <div class="floating-shapes">
+            <div class="shape bg-blue-500 w-20 h-20 top-20 left-10" style="animation-delay: 0s;"></div>
+            <div class="shape bg-purple-500 w-16 h-16 top-40 right-20" style="animation-delay: 1s;"></div>
+            <div class="shape bg-cyan-500 w-12 h-12 bottom-20 left-1/4" style="animation-delay: 2s;"></div>
+            <div class="shape bg-pink-500 w-24 h-24 bottom-40 right-1/4" style="animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="hero-content text-center px-6">
+            <div class="mb-6">
+                <img src="https://i.pinimg.com/736x/14/0f/27/140f2798594bcfd119e72a5c786e9d84.jpg" alt="Professional headshot of Vivek Kumar, a software developer with confident smile and modern business casual attire" class="w-32 h-32 rounded-full mx-auto border-4 border-blue-500 shadow-lg">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">
+                Vivek <span class="text-blue-500">Kumar</span>
+            </h1>
+            <div class="typewriter text-xl md:text-2xl text-gray-300 mb-6 mx-auto max-w-2xl">
+                Passionate Developer & Computer Science Student
+            </div>
+            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                Creating innovative solutions through code and turning ideas into reality
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
+                    View My Work
+                </a>
+                <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://i.pinimg.com/736x/80/72/ae/8072ae50712eba8af10e68c4c4907c74.jpg" alt="Vivek Kumar working on laptop in modern workspace with coding interface visible on screen" class="rounded-2xl shadow-2xl">
+                    <div class="absolute -inset-4 bg-blue-500 rounded-2xl opacity-20 -z-10"></div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Hello! I'm Vivek Kumar</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        I'm a passionate Computer Science student currently pursuing my B.Tech at CGC University. 
+                        With a strong foundation in both front-end and back-end technologies, I enjoy creating 
+                        innovative solutions that make a difference.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        My journey in programming started with C++ and Python, and I've since expanded my 
+                        expertise to include web development technologies like HTML, CSS, JavaScript, and React.js. 
+                        I'm constantly learning and exploring new technologies to enhance my skills.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <span class="text-gray-300">B.Tech Computer Science</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <span class="text-gray-300">CGC University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <span class="text-gray-300">Full Stack Developer</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <span class="text-gray-300">Problem Solver</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block">
+                        Let's Connect
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-black/30">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Technical Skills</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- HTML -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-html5 text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">HTML5</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">95% Mastery</p>
+                </div>
+
+                <!-- CSS -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-css3-alt text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">CSS3</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">90% Mastery</p>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-js-square text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">85% Mastery</p>
+                </div>
+
+                <!-- React -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-react text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">React.js</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">80% Mastery</p>
+                </div>
+
+                <!-- C++ -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">C++</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 88%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">88% Mastery</p>
+                </div>
+
+                <!-- Python -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-python text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Python</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">82% Mastery</p>
+                </div>
+
+                <!-- Java -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-java text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Java</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">78% Mastery</p>
+                </div>
+
+                <!-- Problem Solving -->
+                <div class="skill-card text-center">
+                    <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Problem Solving</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">90% Mastery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">My Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card rounded-2xl p-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/27bc320b-e894-4379-bae6-ec5a1815a684.png" alt="Modern e-commerce website dashboard with product listings and shopping cart interface" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-2">E-Commerce Platform</h3>
+                    <p class="text-gray-400 mb-4">A full-stack e-commerce solution built with React and Node.js</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">React</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">Node.js</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">MongoDB</span>
+                    </div>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">View Project →</a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card rounded-2xl p-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/94a369b0-86a5-49f4-9d68-308e9869f484.png" alt="Weather application interface showing current conditions and forecast with clean UI design" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-2">Weather App</h3>
+                    <p class="text-gray-400 mb-4">Real-time weather application with beautiful UI and location services</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">API</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">CSS</span>
+                    </div>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">View Project →</a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card rounded-2xl p-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce1743ef-ef51-4d94-98b3-194339171732.png" alt="Task management application with drag-and-drop interface and color-coded categories" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-2">Task Manager</h3>
+                    <p class="text-gray-400 mb-4">Productivity app with drag-and-drop functionality and cloud sync</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">React</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">Firebase</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">Material UI</span>
+                    </div>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">View Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-black/30">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Get In Touch</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-6">Let's work together!</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm always interested in new opportunities and challenges. Whether you have a project in mind 
+                        or just want to chat about technology, feel free to reach out!
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Email</p>
+                                <p class="text-white">kumarvivek76923@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Phone</p>
+                                <p class="text-white">+91 6201766193</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Location</p>
+                                <p class="text-white">CGC University, Punjab</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-github text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <form class="space-y-6" id="contactForm">
+                        <input type="text" placeholder="Your Name" class="contact-input w-full" required>
+                        <input type="email" placeholder="Your Email" class="contact-input w-full" required>
+                        <input type="text" placeholder="Subject" class="contact-input w-full" required>
+                        <textarea placeholder="Your Message" rows="5" class="contact-input w-full" required></textarea>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center bg-black/50">
+        <div class="container mx-auto px-6">
+            <p class="text-gray-400">
+                © 2024 Vivek Kumar. All rights reserved. | Built with passion and React.js
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate skill cards on scroll
+        gsap.utils.toArray('.skill-card').forEach((card, index) => {
+            gsap.to(card, {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: index * 0.1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // Animate project cards
+        gsap.utils.toArray('.project-card').forEach((card, index) => {
+            gsap.fromTo(card, 
+                { 
+                    y: 100, 
+                    opacity: 0,
+                    rotationX: -15
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    rotationX: 0,
+                    duration: 1,
+                    delay: index * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    ease: 'power3.out'
+                }
+            );
+        });
+
+        // Animate progress bars
+        gsap.utils.toArray('.progress-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            
+            gsap.to(bar, {
+                width: width,
+                duration: 2,
+                delay: 0.5,
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                ease: 'power3.out'
+            });
+        });
+
+        // Hero section animations
+        gsap.from('.hero-content img', {
+            y: -50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-content h1', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-content .typewriter', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-content p', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.9,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-content a', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 1.2,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        // About section animation
+        gsap.from('#about img', {
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            ease: 'power3.out'
+        });
+
+        gsap.from('#about div:last-child > *', {
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            ease: 'power3.out'
+        });
+
+        // Contact form animation
+        gsap.from('#contact form', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            ease: 'power3.out'
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message (in a real application, this would send data to a server)
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.textContent = 'Message Sent!';
+                submitBtn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-600');
+                    this.reset();
+                }, 2000);
+            }, 1000);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-shapes .shape');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.1 + (index * 0.05);
+                const yPos = -(scrolled * speed);
+                gsap.to(element, {
+                    y: yPos,
+                    duration: 0.5,
+                    ease: 'power1.out'
+                });
+            });
+        });
+
+        // Mobile menu toggle (basic implementation)
+        document.querySelector('nav button').addEventListener('click', () => {
+            alert('Mobile menu would open here. This is a placeholder implementation.');
+        });
+    </script>
+</body>
+</html>
+
